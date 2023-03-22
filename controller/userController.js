@@ -60,4 +60,18 @@ const login = async (req, res) => {
   }
 };
 
-module.exports = { register, login };
+const username = () => {
+  Post.find({}, '-__v')
+    .populate('author', 'username')
+    .exec((err, posts) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log(posts);
+        res.json({ posts });
+      }
+    });
+};
+
+
+module.exports = { register, login, username };

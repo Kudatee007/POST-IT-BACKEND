@@ -20,9 +20,19 @@ const postModel = new Schema(
     image: {
       type: String,
     },
+    createdBy: {
+      type: mongoose.Types.ObjectId,
+      ref: "User",
+      autopopulate: { select: "username" } 
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now()
+    }
   },
   { timestamps: true }
 );
 
+postModel.plugin(require("mongoose-autopopulate"));
 
 module.exports = mongoose.model("POST", postModel);

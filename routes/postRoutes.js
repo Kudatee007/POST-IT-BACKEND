@@ -5,13 +5,16 @@ const {
     updatePost,
     deletePost,
     allPost,
-    singlePost
+    singlePost,
+    onePost,
+    singleStories
 } = require("../controller/postController");
 const uploadImage = require("../controller/uploadController");
 
 
 router.route("/").get(allPost).post(createPost)
-router.route("/:postId").patch(updatePost).delete(deletePost).get(singlePost);
-router.post("/upload", uploadImage)
+router.route("/:postId").patch(updatePost).delete(deletePost).get(singlePost)
+router.get("/one/:postId", onePost);
+router.post("/upload", uploadImage);
 
 module.exports = router;
